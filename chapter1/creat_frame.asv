@@ -1,0 +1,23 @@
+%该代码用于，已经知道坐标系任意两个轴的坐标时，生产完整的旋转矩阵%
+
+function R = Rotation(Axis_X,Axis_Y,Axis_Z)
+    %转化为单位向量
+    Axis_X = Axis_X / norm(Axis_X);
+    Axis_Y = Axis_Y / norm(Axis_Y);
+    Axis_Z = Axis_Z / norm(Axis_Z);
+
+    unkown_axis = 0;
+    if Axis_X == zeros(1,3)   unkown_axis=1;  end
+    if Axis_Y == zeros(1,3)   unkown_axis=2;  end
+    if Axis_Z == zeros(1,3)   unkown_axis=3;  end
+    switch(unkown_axis)
+        case 1 
+            Axis_X = cross(Axis_Y, Axis_Z);
+        case 2 
+            Axis_Y = cross(Axis_Z, Axis_X);
+        case 3 
+            Axis_Z = cross(Axis_X, Axis_Y);
+        otherwise
+            error('Invalid rotation axis.');
+    end
+end

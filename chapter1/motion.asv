@@ -1,0 +1,32 @@
+%改代码用于计算frame的运动%'
+clear all;
+
+x_axis=1;
+axis
+
+
+
+
+
+
+T=T_Rot(1,20);
+
+function T=T_Rot(rot_axis, rot_angle)
+  switch(rot_axis)
+      %绕x轴旋转
+      case 1    
+          Rot = rotx(rot_angle); 
+      %绕x轴旋转
+      case 2   
+          Rot = roty(rot_angle);
+      %绕x轴旋转
+      case 3   
+          Rot = roty(rot_angle);
+      otherwise
+            error('Invalid rotation axis.');
+  end
+  T = eye(4);
+  % 将旋转矩阵嵌入到齐次变换矩阵
+  T(1:3, 1:3) = Rot;   
+end
+
